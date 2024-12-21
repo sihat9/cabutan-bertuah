@@ -141,12 +141,12 @@
 </head>
 <body>
   <div class="container">
-    <!-- Letak URL logo atau GitHub raw link -->
+    <!-- Letak URL logo atau GitHub raw link di bawah -->
     <img src="https://raw.githubusercontent.com/sihat9/klinik-sihatsokmo-24jam/0057b3382ccd2ee5e0f9b29dd1a209f3fb1bda48/Logo_Akasia-removebg-preview%20(1).png" 
          alt="Logo Klinik" class="logo"/>
     <h1>Sertai Program #SihatSokmo</h1>
 
-    <!-- Kita buang action, guna id="myForm" dan tangkap event submit melalui JS -->
+    <!-- Gantikan URL Web App Google Apps Script pada const GAS_URL di JavaScript -->
     <form id="myForm">
       
       <div class="form-group">
@@ -205,9 +205,9 @@
           <option value="HBA1c discount RM5">
           <option value="HBA1c discount RM10">
           <option value="HBA1c discount RM15">
-          <option value="Suction Discount RM5">
-          <option value="Suction discount RM10">
-          <option value="Suction discount RM15">
+          <option value="Suction / Nebulizer Discount RM5">
+          <option value="Suction / Nebulizer discount RM10">
+          <option value="Suction / nebulizer discount RM15">
           <option value="Fbc dicount RM5">
           <option value="fbc discount RM10">
           <option value="IV drip discount RM5">
@@ -253,10 +253,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <script>
-    // Link ke Google Apps Script Web App
+    // Gantikan dengan URL Web App Google Apps Script anda
     const GAS_URL = "https://script.google.com/macros/s/AKfycbxODgvgBITLnxFsYZ67kv7s1W7u1n9kyY11IWgG68OW0mzGkIJfhylRDAMKEA2uem63/exec";
 
-    // Munculkan '6' hanya apabila user fokus
+    // '6' muncul apabila fokus
     const telefonInput = document.getElementById('telefon');
     telefonInput.addEventListener('focus', function(){
       if (this.value.trim() === '') {
@@ -304,8 +304,6 @@
 
       // Kumpul data
       const formData = new FormData(myForm);
-      // formData: namaPenuh, namaPanggilan, ic, telefon, tarikhDaftar, (baucer jika isWinner)
-      // Pastikan 'name' di input sepadan dengan parameter doPost
 
       // Hantar ke Google Apps Script
       try {
@@ -333,7 +331,7 @@
       document.querySelector('.container').style.display = 'none';
       document.getElementById('thankYouMessage').style.display = 'flex';
 
-      // Logic untuk paparkan validity date (sama seperti sebelum)
+      // Logic untuk paparkan validity date
       const freebies = [
         "Susu Farm Fresh Free (2 kotak)",
         "Free Baju T-shirt",
@@ -341,7 +339,9 @@
         "Free tupperware"
       ];
       const isWinner = isWinnerCheckbox.checked;
-      const baucer = document.getElementById('baucer') ? document.getElementById('baucer').value.trim() : "";
+      const baucer = document.getElementById('baucer') 
+                     ? document.getElementById('baucer').value.trim() 
+                     : "";
       const registerDateStr = document.getElementById('tarikhDaftar').value; // yyyy-mm-dd
       let registerDate = new Date(registerDateStr);
 
@@ -352,17 +352,20 @@
       } else {
         if(freebies.includes(baucer)) {
           // Freebies: Valid hari sama
-          validityMessage = "Terima Kasih kerana sertai program #sihatsokmo. Baucer ini valid bermula hari ini!";
+          validityMessage = "Terima Kasih kerana sertai program #sihatsokmo. "
+            + "(Tarikh Valid untuk Voucher <b>" + baucer + "</b> ini adalah bermula hari ini!)";
         } else {
           // Baucer biasa: start esok
           let startDate = addDays(registerDate, 1);
           let endDate = addDays(startDate, 31);
-          validityMessage = "Terima Kasih kerana sertai program #sihatsokmo, (Tarikh valid untuk baucer ini adalah bermula " 
+          validityMessage = "Terima Kasih kerana sertai program #sihatsokmo, "
+            + "(Tarikh Valid untuk Voucher <b>" + baucer + "</b> ini adalah bermula " 
             + formatDate(startDate) + " - " + formatDate(endDate) + ")";
         }
       }
 
-      document.getElementById('validityMessage').textContent = validityMessage;
+      // Gunakan innerHTML untuk benarkan tag <b>
+      document.getElementById('validityMessage').innerHTML = validityMessage;
 
       // Selepas 2 saat, kita screenshot paparan 'thankYouMessage'
       setTimeout(() => {
