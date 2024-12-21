@@ -75,7 +75,7 @@
     vertical-align: middle;
   }
 
-  button[type="submit"] {
+  button[type="button"] {
     background: #008cba;
     color: #fff;
     padding: 12px 20px;
@@ -87,7 +87,7 @@
     margin-top:10px;
   }
 
-  button[type="submit"]:hover {
+  button[type="button"]:hover {
     background: #005f6a;
   }
 
@@ -133,7 +133,7 @@
     h1 {
       font-size: 1.3em;
     }
-    label, input, button[type="submit"] {
+    label, input, button[type="button"] {
       font-size: 1em;
     }
   }
@@ -143,89 +143,87 @@
   <div class="container">
     <img src="https://raw.githubusercontent.com/sihat9/klinik-sihatsokmo-24jam/0057b3382ccd2ee5e0f9b29dd1a209f3fb1bda48/Logo_Akasia-removebg-preview%20(1).png" alt="Logo Klinik" class="logo"/>
     <h1>Sertai Program #SihatSokmo</h1>
-    <form method="POST" action="https://script.google.com/macros/s/AKfycbxODgvgBITLnxFsYZ67kv7s1W7u1n9kyY11IWgG68OW0mzGkIJfhylRDAMKEA2uem63/exec" onsubmit="return handleSubmit(event);">
-      
-      <div class="form-group">
-        <label for="namaPenuh">Nama Penuh:</label>
-        <input type="text" name="namaPenuh" id="namaPenuh" required />
-      </div>
+    
+    <!-- Kita gantikan 'submit' dengan button biasa agar kita boleh buat POST fetch manual -->
+    <div class="form-group">
+      <label for="namaPenuh">Nama Penuh:</label>
+      <input type="text" name="namaPenuh" id="namaPenuh" required />
+    </div>
 
-      <div class="form-group">
-        <label for="namaPanggilan">Nama Panggilan:</label>
-        <input type="text" name="namaPanggilan" id="namaPanggilan" required />
-      </div>
+    <div class="form-group">
+      <label for="namaPanggilan">Nama Panggilan:</label>
+      <input type="text" name="namaPanggilan" id="namaPanggilan" required />
+    </div>
 
-      <div class="form-group">
-        <label for="ic">No IC:</label>
-        <input type="text" name="ic" id="ic" required />
-      </div>
+    <div class="form-group">
+      <label for="ic">No IC:</label>
+      <input type="text" name="ic" id="ic" required />
+    </div>
 
-      <div class="form-group">
-        <label for="telefon">Nom Tel:</label>
-        <!-- Kosong, '6' muncul hanya apabila fokus -->
-        <input type="tel" name="telefon" id="telefon" required placeholder="Contoh: 60123456789" />
-      </div>
+    <div class="form-group">
+      <label for="telefon">Nom Tel:</label>
+      <input type="tel" name="telefon" id="telefon" required placeholder="Contoh: 60123456789" />
+    </div>
 
-      <div class="form-group">
-        <label for="tarikhDaftar">Tarikh Daftar:</label>
-        <input type="date" name="tarikhDaftar" id="tarikhDaftar" required />
-      </div>
+    <div class="form-group">
+      <label for="tarikhDaftar">Tarikh Daftar:</label>
+      <input type="date" name="tarikhDaftar" id="tarikhDaftar" required />
+    </div>
 
-      <div class="form-group">
-        <label>
-          <input type="checkbox" id="isWinner" />
-          Anda telah memenangi hadiah baucer daripada kami, jika 'YA' klik kotak di atas ini
-        </label>
-      </div>
+    <div class="form-group">
+      <label>
+        <input type="checkbox" id="isWinner" />
+        Anda telah memenangi hadiah baucer daripada kami, jika 'YA' klik kotak di atas ini
+      </label>
+    </div>
 
-      <div class="form-group" id="voucherGroup" style="display:none;">
-        <label for="baucer">Baucer Dimenangi:</label>
-        <input list="voucherList" name="baucer" id="baucer" placeholder="Taip untuk cadangan...">
-        <datalist id="voucherList">
-          <option value="consultation discount RM5">
-          <option value="consultation discount RM10">
-          <option value="consultation discount RM15">
-          <option value="consultation free">
-          <option value="ECG discount RM5">
-          <option value="ECG discount RM10">
-          <option value="ECG discount RM15">
-          <option value="ECG Free">
-          <option value="Audiometry discount RM5">
-          <option value="Audiometry Discount RM10">
-          <option value="Audiometry Discount RM15">
-          <option value="Audiometry Free">
-          <option value="Scan (Abd/Pregnant) Discount 5">
-          <option value="Scan (Abd/pregnant) discount RM10">
-          <option value="scan (Abd/Pregnant) discount RM15">
-          <option value="Scan (Abd/pregnant) Free">
-          <option value="HBA1c discount RM5">
-          <option value="HBA1c discount RM10">
-          <option value="HBA1c discount RM15">
-          <option value="Suction Discount RM5">
-          <option value="Suction discount RM10">
-          <option value="Suction discount RM15">
-          <option value="Fbc dicount RM5">
-          <option value="fbc discount RM10">
-          <option value="IV drip discount RM5">
-          <option value="IV drip discount RM10">
-          <option value="IV drip discount RM15">
-          <option value="Blood taking BHS-1 RM50 only">
-          <option value="Susu Farm Fresh Free (2 kotak)">
-          <option value="Free Baju T-shirt">
-          <option value="Free Jug">
-          <option value="Free tupperware">
-        </datalist>
-      </div>
+    <div class="form-group" id="voucherGroup" style="display:none;">
+      <label for="baucer">Baucer Dimenangi:</label>
+      <input list="voucherList" name="baucer" id="baucer" placeholder="Taip untuk cadangan...">
+      <datalist id="voucherList">
+        <option value="consultation discount RM5">
+        <option value="consultation discount RM10">
+        <option value="consultation discount RM15">
+        <option value="consultation free">
+        <option value="ECG discount RM5">
+        <option value="ECG discount RM10">
+        <option value="ECG discount RM15">
+        <option value="ECG Free">
+        <option value="Audiometry discount RM5">
+        <option value="Audiometry Discount RM10">
+        <option value="Audiometry Discount RM15">
+        <option value="Audiometry Free">
+        <option value="Scan (Abd/Pregnant) Discount 5">
+        <option value="Scan (Abd/pregnant) discount RM10">
+        <option value="scan (Abd/Pregnant) discount RM15">
+        <option value="Scan (Abd/pregnant) Free">
+        <option value="HBA1c discount RM5">
+        <option value="HBA1c discount RM10">
+        <option value="HBA1c discount RM15">
+        <option value="Suction Discount RM5">
+        <option value="Suction discount RM10">
+        <option value="Suction discount RM15">
+        <option value="Fbc dicount RM5">
+        <option value="fbc discount RM10">
+        <option value="IV drip discount RM5">
+        <option value="IV drip discount RM10">
+        <option value="IV drip discount RM15">
+        <option value="Blood taking BHS-1 RM50 only">
+        <option value="Susu Farm Fresh Free (2 kotak)">
+        <option value="Free Baju T-shirt">
+        <option value="Free Jug">
+        <option value="Free tupperware">
+      </datalist>
+    </div>
 
-      <div class="agreement">
-        <label>
-          <input type="checkbox" id="agreement" required />
-          Dengan ini, saya bersetuju bahawa maklumat yang diisi di atas boleh disimpan dan digunakan oleh pihak Klinik Sihatsokmo, serta saya bersedia menerima sebarang makluman dan informasi berkaitan program-program yang dianjurkan oleh pihak klinik.
-        </label>
-      </div>
+    <div class="agreement">
+      <label>
+        <input type="checkbox" id="agreement" required />
+        Dengan ini, saya bersetuju bahawa maklumat yang diisi di atas boleh disimpan dan digunakan oleh pihak Klinik Sihatsokmo, serta saya bersedia menerima sebarang makluman dan informasi berkaitan program-program yang dianjurkan oleh pihak klinik.
+      </label>
+    </div>
 
-      <button type="submit">Hantar</button>
-    </form>
+    <button type="button" id="btnSubmit">Hantar</button>
   </div>
 
   <!-- Overlay selepas submit -->
@@ -281,66 +279,96 @@
       return dd + "/" + mm + "/" + yyyy;
     }
 
-    function handleSubmit(event) {
-      var agreementChecked = document.getElementById('agreement').checked;
+    async function handleSubmit() {
+      // Pastikan checkbox agreement
+      const agreementChecked = document.getElementById('agreement').checked;
       if (!agreementChecked) {
         alert("Anda perlu bersetuju dengan syarat sebelum menghantar.");
         return false; 
       }
 
-      // Paparan "Terima Kasih" setelah submit
-      setTimeout(function() {
-        document.querySelector('.container').style.display = 'none';
-        document.getElementById('thankYouMessage').style.display = 'flex';
+      // Kumpul data
+      const namaPenuh = document.getElementById('namaPenuh').value.trim();
+      const namaPanggilan = document.getElementById('namaPanggilan').value.trim();
+      const ic = document.getElementById('ic').value.trim();
+      const telefon = document.getElementById('telefon').value.trim();
+      const tarikhDaftar = document.getElementById('tarikhDaftar').value; // yyyy-mm-dd
+      const isWinner = isWinnerCheckbox.checked;
+      const baucer = isWinner ? document.getElementById('baucer').value.trim() : "";
 
-        // Logic untuk paparkan validity date
-        const isWinner = isWinnerCheckbox.checked;
-        const baucer = document.getElementById('baucer').value.trim();
-        const freebies = [
-          "Susu Farm Fresh Free (2 kotak)",
-          "Free Baju T-shirt",
-          "Free Jug",
-          "Free tupperware"
-        ];
+      // URL web app Apps Script
+      const url = "YOUR_APPS_SCRIPT_WEB_APP_URL"; // <-- Ganti
 
-        const registerDateStr = document.getElementById('tarikhDaftar').value; // yyyy-mm-dd
-        let registerDate = new Date(registerDateStr);
+      // Buat request POST guna fetch
+      try {
+        const formData = new URLSearchParams();
+        formData.append('namaPenuh', namaPenuh);
+        formData.append('namaPanggilan', namaPanggilan);
+        formData.append('ic', ic);
+        formData.append('telefon', telefon);
+        formData.append('tarikhDaftar', tarikhDaftar);
+        formData.append('baucer', baucer);
 
-        let validityMessage = "";
-        if(!isWinner) {
-          // Tiada baucer
-          validityMessage = "Terima Kasih kerana sertai program #sihatsokmo.";
+        const response = await fetch(url, {
+          method: 'POST',
+          body: formData
+        });
+        const result = await response.json();
+        
+        if(result.status === "error"){
+          // Tunjuk alert
+          alert(result.message || "Ralat tidak diketahui.");
+          return false;
         } else {
-          // Ada baucer
-          if(freebies.includes(baucer)) {
-            // Baucer freebies: Valid hari sama
-            validityMessage = "Terima Kasih kerana sertai program #sihatsokmo. Baucer ini valid bermula hari ini!";
+          // Berjaya simpan
+          // Paparan "Terima Kasih"
+          document.querySelector('.container').style.display = 'none';
+          document.getElementById('thankYouMessage').style.display = 'flex';
+
+          // Logic untuk paparkan validity date
+          const freebies = [
+            "Susu Farm Fresh Free (2 kotak)",
+            "Free Baju T-shirt",
+            "Free Jug",
+            "Free tupperware"
+          ];
+          let validityMessage = "";
+          if(!isWinner) {
+            // Tiada baucer
+            validityMessage = "Terima Kasih kerana sertai program #sihatsokmo.";
           } else {
-            // Baucer biasa: start esok
-            let startDate = addDays(registerDate, 1);
-            let endDate = addDays(startDate, 31);
-            validityMessage = "Terima Kasih kerana sertai program #sihatsokmo, (Tarikh valid untuk baucer ini adalah bermula " 
-              + formatDate(startDate) + " - " + formatDate(endDate) + ")";
+            // Ada baucer
+            if(freebies.includes(baucer)) {
+              // Baucer freebies: Valid hari sama
+              validityMessage = "Terima Kasih kerana sertai program #sihatsokmo. Baucer ini valid bermula hari ini!";
+            } else {
+              // Baucer biasa: start esok
+              let rDate = new Date(tarikhDaftar);
+              let startDate = addDays(rDate, 1);
+              let endDate = addDays(startDate, 31);
+              validityMessage = "Terima Kasih kerana sertai program #sihatsokmo, (Tarikh valid untuk baucer ini adalah bermula " 
+                + formatDate(startDate) + " - " + formatDate(endDate) + ")";
+            }
           }
+          document.getElementById('validityMessage').textContent = validityMessage;
+
+          // Selepas paparan, kita cuba screenshot dan download automatik
+          setTimeout(() => {
+            html2canvas(document.getElementById('thankYouMessage')).then(canvas => {
+              // Buat download gambar
+              let link = document.createElement('a');
+              link.download = 'baucer_sihatsokmo.png';
+              link.href = canvas.toDataURL();
+              link.click();
+            });
+          }, 2000);
         }
-
-        document.getElementById('validityMessage').textContent = validityMessage;
-
-        // Selepas paparan, kita cuba screenshot dan download automatik
-        setTimeout(() => {
-          html2canvas(document.getElementById('thankYouMessage')).then(canvas => {
-            // Buat download gambar
-            let link = document.createElement('a');
-            link.download = 'baucer_sihatsokmo.png';
-            link.href = canvas.toDataURL();
-            link.click();
-          });
-        }, 2000);
-
-      }, 500); 
-      
-      return true;
+      } catch(err) {
+        alert("Ralat sambungan: " + err);
+      }
     }
+
+    document.getElementById('btnSubmit').addEventListener('click', handleSubmit);
   </script>
 
 </body>
