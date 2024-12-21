@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Cabutan Bertuah #SihatSokmo</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f9f9fc;
+    text-align: center;
+    padding: 20px;
+    margin:0;
+  }
+
+  .container {
+    max-width: 400px;
+    margin: 40px auto;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: relative;
+  }
+
+  img.logo {
+    max-width: 120px;
+    margin-bottom: 20px;
+  }
+
+  h1 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    font-weight: normal;
+  }
+
+  .form-group {
+    text-align: left;
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+    font-size: 0.95em;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="tel"],
+  .form-group input[type="date"],
+  .form-group input[list] {
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.95em;
+    box-sizing: border-box;
+  }
+
+  .agreement {
+    text-align: left;
+    font-size: 0.9em;
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.4em;
+  }
+
+  .agreement input[type="checkbox"] {
+    margin-right: 5px;
+    transform: scale(1.2);
+    vertical-align: middle;
+  }
+
+  button[type="submit"] {
+    background: #008cba;
+    color: #fff;
+    padding: 12px 20px;
+    border:none;
+    border-radius:5px;
+    cursor: pointer;
+    font-size: 1em;
+    width: 100%;
+    margin-top:10px;
+  }
+
+  button[type="submit"]:hover {
+    background: #005f6a;
+  }
+
+  .thank-you-message {
+    display: none;
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding:20px;
+    box-sizing:border-box;
+    text-align:center;
+  }
+
+  .thank-you-message h2, .thank-you-message p {
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  /* Confetti */
+  .confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: red;
+    animation: fall 2s linear infinite;
+    opacity: 0;
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-100vh) rotate(0deg); opacity:1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity:0; }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      margin: 20px;
+      padding: 15px;
+    }
+    h1 {
+      font-size: 1.3em;
+    }
+    label, input, button[type="submit"] {
+      font-size: 1em;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://raw.githubusercontent.com/sihat9/klinik-sihatsokmo-24jam/0057b3382ccd2ee5e0f9b29dd1a209f3fb1bda48/Logo_Akasia-removebg-preview%20(1).png" alt="Logo Klinik" class="logo"/>
+    <h1>Sertai Program #SihatSokmo</h1>
+    <form method="POST" action="https://script.google.com/macros/s/AKfycbxODgvgBITLnxFsYZ67kv7s1W7u1n9kyY11IWgG68OW0mzGkIJfhylRDAMKEA2uem63/exec" onsubmit="return handleSubmit(event);">
+      
+      <div class="form-group">
+        <label for="namaPenuh">Nama Penuh:</label>
+        <input type="text" name="namaPenuh" id="namaPenuh" required />
+      </div>
+
+      <div class="form-group">
+        <label for="namaPanggilan">Nama Panggilan:</label>
+        <input type="text" name="namaPanggilan" id="namaPanggilan" required />
+      </div>
+
+      <div class="form-group">
+        <label for="ic">No IC:</label>
+        <input type="text" name="ic" id="ic" required />
+      </div>
+
+      <div class="form-group">
+        <label for="telefon">Nom Tel:</label>
+        <!-- Kosong, '6' muncul hanya apabila fokus -->
+        <input type="tel" name="telefon" id="telefon" required placeholder="Contoh: 60123456789" />
+      </div>
+
+      <div class="form-group">
+        <label for="tarikhDaftar">Tarikh Daftar:</label>
+        <input type="date" name="tarikhDaftar" id="tarikhDaftar" required />
+      </div>
+
+      <div class="form-group">
+        <label>
+          <input type="checkbox" id="isWinner" />
+          Anda telah memenangi hadiah baucer daripada kami, jika 'YA' klik kotak di atas ini
+        </label>
+      </div>
+
+      <div class="form-group" id="voucherGroup" style="display:none;">
+        <label for="baucer">Baucer Dimenangi:</label>
+        <input list="voucherList" name="baucer" id="baucer" placeholder="Taip untuk cadangan...">
+        <datalist id="voucherList">
+          <option value="consultation discount RM5">
+          <option value="consultation discount RM10">
+          <option value="consultation discount RM15">
+          <option value="consultation free">
+          <option value="ECG discount RM5">
+          <option value="ECG discount RM10">
+          <option value="ECG discount RM15">
+          <option value="ECG Free">
+          <option value="Audiometry discount RM5">
+          <option value="Audiometry Discount RM10">
+          <option value="Audiometry Discount RM15">
+          <option value="Audiometry Free">
+          <option value="Scan (Abd/Pregnant) Discount 5">
+          <option value="Scan (Abd/pregnant) discount RM10">
+          <option value="scan (Abd/Pregnant) discount RM15">
+          <option value="Scan (Abd/pregnant) Free">
+          <option value="HBA1c discount RM5">
+          <option value="HBA1c discount RM10">
+          <option value="HBA1c discount RM15">
+          <option value="Suction Discount RM5">
+          <option value="Suction discount RM10">
+          <option value="Suction discount RM15">
+          <option value="Fbc dicount RM5">
+          <option value="fbc discount RM10">
+          <option value="IV drip discount RM5">
+          <option value="IV drip discount RM10">
+          <option value="IV drip discount RM15">
+          <option value="Blood taking BHS-1 RM50 only">
+          <option value="Susu Farm Fresh Free (2 kotak)">
+          <option value="Free Baju T-shirt">
+          <option value="Free Jug">
+          <option value="Free tupperware">
+        </datalist>
+      </div>
+
+      <div class="agreement">
+        <label>
+          <input type="checkbox" id="agreement" required />
+          Dengan ini, saya bersetuju bahawa maklumat yang diisi di atas boleh disimpan dan digunakan oleh pihak Klinik Sihatsokmo, serta saya bersedia menerima sebarang makluman dan informasi berkaitan program-program yang dianjurkan oleh pihak klinik.
+        </label>
+      </div>
+
+      <button type="submit">Hantar</button>
+    </form>
+  </div>
+
+  <!-- Overlay selepas submit -->
+  <div class="thank-you-message" id="thankYouMessage">
+    <h2>Terima kasih!</h2>
+    <p id="validityMessage"></p>
+    <script>
+      // Confetti
+      for (var i = 0; i < 100; i++) {
+        var confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = 'hsl(' + Math.random()*360 + ',100%,50%)';
+        confetti.style.animationDelay = Math.random() * 2 + 's';
+        document.getElementById('thankYouMessage').appendChild(confetti);
+      }
+    </script>
+  </div>
+
+  <!-- html2canvas CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <script>
+    const telefonInput = document.getElementById('telefon');
+    telefonInput.addEventListener('focus', function(){
+      if (this.value.trim() === '') {
+        this.value = '6';
+      }
+    });
+
+    const isWinnerCheckbox = document.getElementById('isWinner');
+    const voucherGroup = document.getElementById('voucherGroup');
+    isWinnerCheckbox.addEventListener('change', function() {
+      if(this.checked) {
+        voucherGroup.style.display = 'block';
+        document.getElementById('baucer').required = true;
+      } else {
+        voucherGroup.style.display = 'none';
+        document.getElementById('baucer').required = false;
+      }
+    });
+
+    function addDays(dateObj, days) {
+      let result = new Date(dateObj);
+      result.setDate(result.getDate() + days);
+      return result;
+    }
+
+    function formatDate(dateObj) {
+      let dd = ("0" + dateObj.getDate()).slice(-2);
+      let mm = ("0" + (dateObj.getMonth()+1)).slice(-2);
+      let yyyy = dateObj.getFullYear();
+      return dd + "/" + mm + "/" + yyyy;
+    }
+
+    function handleSubmit(event) {
+      var agreementChecked = document.getElementById('agreement').checked;
+      if (!agreementChecked) {
+        alert("Anda perlu bersetuju dengan syarat sebelum menghantar.");
+        return false; 
+      }
+
+      // Paparan "Terima Kasih" setelah submit
+      setTimeout(function() {
+        document.querySelector('.container').style.display = 'none';
+        document.getElementById('thankYouMessage').style.display = 'flex';
+
+        // Logic untuk paparkan validity date
+        const isWinner = isWinnerCheckbox.checked;
+        const baucer = document.getElementById('baucer').value.trim();
+        const freebies = [
+          "Susu Farm Fresh Free (2 kotak)",
+          "Free Baju T-shirt",
+          "Free Jug",
+          "Free tupperware"
+        ];
+
+        const registerDateStr = document.getElementById('tarikhDaftar').value; // yyyy-mm-dd
+        let registerDate = new Date(registerDateStr);
+
+        let validityMessage = "";
+        if(!isWinner) {
+          // Tiada baucer
+          validityMessage = "Terima Kasih kerana sertai program #sihatsokmo.";
+        } else {
+          // Ada baucer
+          if(freebies.includes(baucer)) {
+            // Baucer freebies: Valid hari sama
+            validityMessage = "Terima Kasih kerana sertai program #sihatsokmo. Baucer ini valid bermula hari ini!";
+          } else {
+            // Baucer biasa: start esok
+            let startDate = addDays(registerDate, 1);
+            let endDate = addDays(startDate, 31);
+            validityMessage = "Terima Kasih kerana sertai program #sihatsokmo, (Tarikh valid untuk baucer ini adalah bermula " 
+              + formatDate(startDate) + " - " + formatDate(endDate) + ")";
+          }
+        }
+
+        document.getElementById('validityMessage').textContent = validityMessage;
+
+        // Selepas paparan, kita cuba screenshot dan download automatik
+        setTimeout(() => {
+          html2canvas(document.getElementById('thankYouMessage')).then(canvas => {
+            // Buat download gambar
+            let link = document.createElement('a');
+            link.download = 'baucer_sihatsokmo.png';
+            link.href = canvas.toDataURL();
+            link.click();
+          });
+        }, 2000);
+
+      }, 500); 
+      
+      return true;
+    }
+  </script>
+
+</body>
+</html>
