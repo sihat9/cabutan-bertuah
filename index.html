@@ -61,6 +61,12 @@
     box-sizing: border-box;
   }
 
+  /* Jadikan kolom tarikh tidak boleh diedit (read-only) */
+  .form-group input[type="date"][readonly] {
+    background-color: #f0f0f0; /* Supaya kelihatan disabled */
+    pointer-events: none;      /* Elakkan user klik popup datepicker */
+  }
+
   .agreement {
     text-align: left;
     font-size: 0.9em;
@@ -91,6 +97,7 @@
     background: #005f6a;
   }
 
+  /* Paparan "Terima Kasih" */
   .thank-you-message {
     display: none;
     position: fixed;
@@ -172,7 +179,8 @@
 
       <div class="form-group">
         <label for="tarikhDaftar">Tarikh Daftar:</label>
-        <input type="date" name="tarikhDaftar" id="tarikhDaftar" required />
+        <!-- Read-only, auto diisi tarikh semasa -->
+        <input type="date" name="tarikhDaftar" id="tarikhDaftar" required readonly />
       </div>
 
       <div class="form-group">
@@ -253,7 +261,24 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <script>
-    // Gantikan dengan URL Web App Google Apps Script anda
+    // 1) Tetapkan tarikh semasa pada kolom tarikhDaftar, jadikan ia read-only
+    document.addEventListener("DOMContentLoaded", function(){
+      const dateInput = document.getElementById('tarikhDaftar');
+      if (dateInput) {
+        // Dapatkan tarikh semasa
+        let today = new Date();
+        let yyyy = today.getFullYear();
+        let mm = ("0" + (today.getMonth() + 1)).slice(-2);
+        let dd = ("0" + today.getDate()).slice(-2);
+        // Format yyyy-mm-dd
+        let isoDate = yyyy + "-" + mm + "-" + dd;
+
+        dateInput.value = isoDate;
+        dateInput.readOnly = true;  // Pastikan tak boleh diubah
+      }
+    });
+
+    // 2) Gantikan dengan URL Web App Google Apps Script anda
     const GAS_URL = "https://script.google.com/macros/s/AKfycbxODgvgBITLnxFsYZ67kv7s1W7u1n9kyY11IWgG68OW0mzGkIJfhylRDAMKEA2uem63/exec";
 
     // '6' muncul apabila fokus
@@ -355,7 +380,7 @@
           validityMessage = "Terima Kasih kerana sertai program #sihatsokmo. "
             + "(Tarikh Valid untuk Voucher <b>" + baucer + "</b> ini adalah bermula hari ini!)";
         } else {
-          // Baucer biasa: start esok
+          // Baucer biasa: start esok, sah 31 hari
           let startDate = addDays(registerDate, 1);
           let endDate = addDays(startDate, 31);
           validityMessage = "Terima Kasih kerana sertai program #sihatsokmo, "
