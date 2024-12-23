@@ -1,150 +1,164 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Cabutan Bertuah #SihatSokmo</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f9f9fc;
-    text-align: center;
-    padding: 20px;
-    margin:0;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cabutan Bertuah #SihatSokmo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9fc;
+      text-align: center;
+      padding: 20px;
+      margin:0;
+    }
 
-  .container {
-    max-width: 400px;
-    margin: 40px auto;
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    position: relative;
-  }
-
-  img.logo {
-    max-width: 120px;
-    margin-bottom: 20px;
-  }
-
-  h1 {
-    color: #333;
-    margin-bottom: 20px;
-    font-size: 1.5em;
-    font-weight: normal;
-  }
-
-  .form-group {
-    text-align: left;
-    margin-bottom: 15px;
-  }
-
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #555;
-    font-size: 0.95em;
-  }
-
-  .form-group input[type="text"],
-  .form-group input[type="tel"],
-  .form-group input[type="date"],
-  .form-group input[list] {
-    width: 100%;
-    padding: 10px;
-    margin: 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 0.95em;
-    box-sizing: border-box;
-  }
-
-  /* Jadikan kolom tarikh tidak boleh diedit (read-only) */
-  .form-group input[type="date"][readonly] {
-    background-color: #f0f0f0; /* Supaya kelihatan disabled */
-    pointer-events: none;      /* Elakkan user klik popup datepicker */
-  }
-
-  .agreement {
-    text-align: left;
-    font-size: 0.9em;
-    color: #333;
-    margin-bottom: 20px;
-    line-height: 1.4em;
-  }
-
-  .agreement input[type="checkbox"] {
-    margin-right: 5px;
-    transform: scale(1.2);
-    vertical-align: middle;
-  }
-
-  button[type="submit"] {
-    background: #008cba;
-    color: #fff;
-    padding: 12px 20px;
-    border:none;
-    border-radius:5px;
-    cursor: pointer;
-    font-size: 1em;
-    width: 100%;
-    margin-top:10px;
-  }
-
-  button[type="submit"]:hover {
-    background: #005f6a;
-  }
-
-  /* Paparan "Terima Kasih" */
-  .thank-you-message {
-    display: none;
-    position: fixed;
-    top:0; left:0; right:0; bottom:0;
-    background: rgba(0,0,0,0.5);
-    z-index: 999;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding:20px;
-    box-sizing:border-box;
-    text-align:center;
-  }
-
-  .thank-you-message h2, .thank-you-message p {
-    color: #fff;
-    margin-bottom: 20px;
-  }
-
-  /* Confetti */
-  .confetti {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: red;
-    animation: fall 2s linear infinite;
-    opacity: 0;
-  }
-
-  @keyframes fall {
-    0% { transform: translateY(-100vh) rotate(0deg); opacity:1; }
-    100% { transform: translateY(100vh) rotate(720deg); opacity:0; }
-  }
-
-  @media (max-width: 480px) {
     .container {
-      margin: 20px;
-      padding: 15px;
+      max-width: 400px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
     }
+
+    img.logo {
+      max-width: 120px;
+      margin-bottom: 20px;
+    }
+
     h1 {
-      font-size: 1.3em;
+      color: #333;
+      margin-bottom: 20px;
+      font-size: 1.5em;
+      font-weight: normal;
     }
-    label, input, button[type="submit"] {
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #555;
+      font-size: 0.95em;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="tel"],
+    .form-group input[type="date"],
+    .form-group input[list] {
+      width: 100%;
+      padding: 10px;
+      margin: 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 0.95em;
+      box-sizing: border-box;
+    }
+
+    /* Jadikan kolom tarikh tidak boleh diedit (read-only) */
+    .form-group input[type="date"][readonly] {
+      background-color: #f0f0f0; /* Supaya kelihatan disabled */
+      pointer-events: none;      /* Elakkan user klik popup datepicker */
+    }
+
+    .agreement {
+      text-align: left;
+      font-size: 0.9em;
+      color: #333;
+      margin-bottom: 20px;
+      line-height: 1.4em;
+    }
+
+    .agreement input[type="checkbox"] {
+      margin-right: 5px;
+      transform: scale(1.2);
+      vertical-align: middle;
+    }
+
+    button[type="submit"] {
+      background: #008cba;
+      color: #fff;
+      padding: 12px 20px;
+      border:none;
+      border-radius:5px;
+      cursor: pointer;
       font-size: 1em;
+      width: 100%;
+      margin-top:10px;
     }
-  }
-</style>
+
+    button[type="submit"]:hover {
+      background: #005f6a;
+    }
+
+    /* Paparan "Terima Kasih" */
+    .thank-you-message {
+      display: none;
+      position: fixed;
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.5);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding:20px;
+      box-sizing:border-box;
+      text-align:center;
+      display: flex; /* Tambah ini untuk memastikan flexbox berfungsi */
+    }
+
+    .thank-you-message h2, .thank-you-message p {
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    /* Confetti */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: red;
+      animation: fall 2s linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-100vh) rotate(0deg); opacity:1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity:0; }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        margin: 20px;
+        padding: 15px;
+      }
+      h1 {
+        font-size: 1.3em;
+      }
+      label, input, button[type="submit"] {
+        font-size: 1em;
+      }
+    }
+
+    /* Tambahan: Gaya untuk radio buttons */
+    .form-group.radio-group {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .form-group.radio-group label {
+      font-weight: normal;
+      color: #555;
+      font-size: 0.95em;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -183,13 +197,20 @@
         <input type="date" name="tarikhDaftar" id="tarikhDaftar" required readonly />
       </div>
 
-      <div class="form-group">
+      <!-- Radio Buttons untuk Menandakan Pemilikan Baucer -->
+      <div class="form-group radio-group">
+        <label>Anda telah memenangi hadiah baucer daripada kami?</label>
         <label>
-          <input type="checkbox" id="isWinner" />
-          Anda telah memenangi hadiah baucer daripada kami, jika 'YA' klik kotak di atas ini
+          <input type="radio" name="hasBaucer" id="hasBaucerYes" value="yes" required />
+          Ya
+        </label>
+        <label>
+          <input type="radio" name="hasBaucer" id="hasBaucerNo" value="no" required />
+          Tidak
         </label>
       </div>
 
+      <!-- Group Baucer yang Akan Dipaparkan Berdasarkan Pilihan Radio -->
       <div class="form-group" id="voucherGroup" style="display:none;">
         <label for="baucer">Baucer Dimenangi:</label>
         <input list="voucherList" name="baucer" id="baucer" placeholder="Taip untuk cadangan...">
@@ -289,17 +310,31 @@
       }
     });
 
-    // Tunjuk/sembunyi baucer
-    const isWinnerCheckbox = document.getElementById('isWinner');
-    const voucherGroup = document.getElementById('voucherGroup');
-    isWinnerCheckbox.addEventListener('change', function() {
-      if(this.checked) {
-        voucherGroup.style.display = 'block';
-        document.getElementById('baucer').required = true;
-      } else {
-        voucherGroup.style.display = 'none';
-        document.getElementById('baucer').required = false;
+    telefonInput.addEventListener('input', function(){
+      // Jika tidak bermula dengan '6', kita prefix
+      if (!this.value.startsWith('6')) {
+        // Buang semua leading '6' dan prefix sekali sahaja
+        this.value = '6' + this.value.replace(/^6+/, '');
       }
+    });
+
+    // Tunjuk/sembunyi baucer berdasarkan radio buttons
+    const hasBaucerYes = document.getElementById('hasBaucerYes');
+    const hasBaucerNo = document.getElementById('hasBaucerNo');
+    const voucherGroup = document.getElementById('voucherGroup');
+
+    // Pastikan voucherGroup ditunjukkan hanya jika 'Ya' dipilih
+    const radioButtons = document.getElementsByName('hasBaucer');
+    radioButtons.forEach(radio => {
+      radio.addEventListener('change', function() {
+        if (this.value === 'yes') {
+          voucherGroup.style.display = 'block';
+          document.getElementById('baucer').required = true;
+        } else {
+          voucherGroup.style.display = 'none';
+          document.getElementById('baucer').required = false;
+        }
+      });
     });
 
     function addDays(dateObj, days) {
@@ -318,7 +353,7 @@
     // Handle form submission via AJAX
     const myForm = document.getElementById('myForm');
     myForm.addEventListener('submit', async function(e) {
-      e.preventDefault(); // halang form hantar cara biasa
+      e.preventDefault(); // Halang form hantar cara biasa
 
       // Semak persetujuan
       const agreementChecked = document.getElementById('agreement').checked;
@@ -334,7 +369,7 @@
       try {
         const response = await fetch(GAS_URL, {
           method: 'POST',
-          body: formData
+          body: new URLSearchParams(formData) // Tukar FormData ke URLSearchParams
         });
         const result = await response.json();
 
@@ -363,7 +398,7 @@
         "Free Jug",
         "Free tupperware"
       ];
-      const isWinner = isWinnerCheckbox.checked;
+      const isWinner = document.getElementById('hasBaucerYes').checked;
       const baucer = document.getElementById('baucer') 
                      ? document.getElementById('baucer').value.trim() 
                      : "";
@@ -380,9 +415,9 @@
           validityMessage = "Terima Kasih kerana sertai program #sihatsokmo. "
             + "(Tarikh Valid untuk Voucher <b>" + baucer + "</b> ini adalah bermula hari ini!)";
         } else {
-          // Baucer biasa: start esok, sah 31 hari
+          // Baucer biasa: start esok, sah 33 hari (32 + 1 hari tambahan)
           let startDate = addDays(registerDate, 1);
-          let endDate = addDays(startDate, 31);
+          let endDate = addDays(startDate, 32); // 32 hari + 1 hari = 33 hari
           validityMessage = "Terima Kasih kerana sertai program #sihatsokmo, "
             + "(Tarikh Valid untuk Voucher <b>" + baucer + "</b> ini adalah bermula " 
             + formatDate(startDate) + " - " + formatDate(endDate) + ")";
