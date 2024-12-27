@@ -110,7 +110,6 @@
       padding:20px;
       box-sizing:border-box;
       text-align:center;
-      /* Hapuskan display: flex; di sini */
     }
 
     .thank-you-message h2, .thank-you-message p {
@@ -162,7 +161,7 @@
 </head>
 <body>
   <div class="container">
-    <!-- Letak URL logo atau GitHub raw link di bawah -->
+    <!-- Logo Klinik -->
     <img src="https://raw.githubusercontent.com/sihat9/klinik-sihatsokmo-24jam/0057b3382ccd2ee5e0f9b29dd1a209f3fb1bda48/Logo_Akasia-removebg-preview%20(1).png" 
          alt="Logo Klinik" class="logo"/>
     <h1>Sertai Program #SihatSokmo</h1>
@@ -253,7 +252,7 @@
       <div class="agreement">
         <label>
           <input type="checkbox" id="agreement" required />
-          Dengan ini, saya bersetuju bahawa maklumat yang diisi di atas boleh disimpan dan digunakan oleh pihak Klinik Sihatsokmo, serta saya bersedia menerima sebarang makluman dan informasi berkaitan program-program yang dianjurkan oleh pihak klinik.
+          Dengan ini, saya bersetuju bahawa maklumat ...
         </label>
       </div>
 
@@ -313,7 +312,6 @@
     telefonInput.addEventListener('input', function(){
       // Jika tidak bermula dengan '6', kita prefix
       if (!this.value.startsWith('6')) {
-        // Buang semua leading '6' dan prefix sekali sahaja
         this.value = '6' + this.value.replace(/^6+/, '');
       }
     });
@@ -337,17 +335,35 @@
       });
     });
 
+    // Fungsi untuk tambah hari
     function addDays(dateObj, days) {
       let result = new Date(dateObj);
       result.setDate(result.getDate() + days);
       return result;
     }
 
+    // Fungsi format tarikh DD/MM/YYYY
     function formatDate(dateObj) {
       let dd = ("0" + dateObj.getDate()).slice(-2);
-      let mm = ("0" + (dateObj.getMonth()+1)).slice(-2);
+      let mm = ("0" + (dateObj.getMonth() + 1)).slice(-2);
       let yyyy = dateObj.getFullYear();
       return dd + "/" + mm + "/" + yyyy;
+    }
+
+    // Fungsi bantu getNextMonthSameDay
+    function getNextMonthSameDay(dateObj, plusDays) {
+      let startDate = new Date(dateObj);
+      startDate.setDate(startDate.getDate() + plusDays);
+
+      let endDate = new Date(startDate);
+      let desiredDay = endDate.getDate();
+      endDate.setMonth(endDate.getMonth() + 1);
+
+      // Jika hari sama tidak wujud, guna hari terakhir bulan
+      if (endDate.getDate() !== desiredDay) {
+        endDate = new Date(endDate.getFullYear(), endDate.getMonth() + 1, 0);
+      }
+      return { start: startDate, end: endDate };
     }
 
     // Handle form submission via AJAX
@@ -374,7 +390,6 @@
         const result = await response.json();
 
         if (result.status === "error") {
-          // Papar ralat
           alert(result.message || "Ralat tidak diketahui.");
           return false;
         } else if (result.status === "success") {
@@ -398,39 +413,42 @@
         "Free Jug",
         "Free tupperware"
       ];
+      // Semak sama ada radio 'Yes' (punya baucer)
       const isWinner = document.getElementById('hasBaucerYes').checked;
-      const baucer = document.getElementById('baucer') 
-                     ? document.getElementById('baucer').value.trim() 
-                     : "";
-      const registerDateStr = document.getElementById('tarikhDaftar').value; // yyyy-mm-dd
+      const baucerEl = document.getElementById('baucer');
+      const baucer = baucerEl ? baucerEl.value.trim() : "";
+
+      // Tarikh daftar (yyyy-mm-dd)
+      const registerDateStr = document.getElementById('tarikhDaftar').value; 
       let registerDate = new Date(registerDateStr);
 
       let validityMessage = "";
-      if(!isWinner) {
+      if (!isWinner) {
         // Tiada baucer
         validityMessage = "Terima Kasih kerana sertai program #sihatsokmo.";
       } else {
-        if(freebies.includes(baucer)) {
-          // Freebies: Valid hari sama
+        if (freebies.includes(baucer)) {
+          // Baucer freebies => valid hari sama
           validityMessage = "Terima Kasih kerana sertai program #sihatsokmo. "
             + "(Tarikh Valid untuk Voucher <b>" + baucer + "</b> ini adalah bermula hari ini!)";
         } else {
-          // Baucer biasa: start esok, sah 33 hari (32 + 1 hari tambahan)
-          let startDate = addDays(registerDate, 1);
-          let endDate = addDays(startDate, 32); // 32 hari + 1 hari = 33 hari
+          // Baucer biasa => mula esok, tamat hari sama bulan depan (jika wujud)
+          let { start, end } = getNextMonthSameDay(registerDate, 1);
+          let startStr = formatDate(start);
+          let endStr = formatDate(end);
+
           validityMessage = "Terima Kasih kerana sertai program #sihatsokmo, "
             + "(Tarikh Valid untuk Voucher <b>" + baucer + "</b> ini adalah bermula " 
-            + formatDate(startDate) + " - " + formatDate(endDate) + ")";
+            + startStr + " - " + endStr + ")";
         }
       }
 
-      // Gunakan innerHTML untuk benarkan tag <b>
+      // Papar mesej
       document.getElementById('validityMessage').innerHTML = validityMessage;
 
       // Selepas 2 saat, kita screenshot paparan 'thankYouMessage'
       setTimeout(() => {
         html2canvas(document.getElementById('thankYouMessage')).then(canvas => {
-          // Buat download gambar
           let link = document.createElement('a');
           link.download = 'baucer_sihatsokmo.png';
           link.href = canvas.toDataURL();
